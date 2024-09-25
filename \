@@ -1,26 +1,10 @@
 import numpy as np
 import random as rnd
 
-def remove_duplicates_from_field(field):
-    """
-        This function removes digitals that have 1 or more occurrences in field.
-        This function takes only one argument that should be numpy.ndarray type.
-        This function returns None.
-    """
-    # Type validation section
-    assert type(field) == np.ndarray
-    assert field.shape == (9,9)
-
-    remove_duplicates_from_groups(field)
-    for row in field:
-        remove_duplicates_from_ndarray(row)
-    for column in field.transpose():
-        remove_duplicates_from_ndarray(column)
-
 def remove_duplicates_from_ndarray(a):
     """ 
         This function removes digitals that have 1 or more occurrences in a.
-        This fucntion takes only one argument that should be numpy.ndarray type.
+        This fucntion takes only one argument that should be numpu.ndarray type.
         This function returns None.
     """
     # Type validation section
@@ -105,29 +89,21 @@ def main():
     The table of available commands listed below:
         print_field -- This command will show current state of field
         set_random_field -- This command fill field by random digitals from 1 to 9
-        remove_duplicates_from_field -- This command remove duplicates from field
         exit -- Exit from the programm
     
     !>  """
-    ### NOTE! Please make sure that field should exists in context!
-    context = {
-        "field": get_field()
-    }
+    field = get_field()
 
     functions = {
-        "print_field": lambda context: print(context.get('field', "field in context is not found")),
-        "set_random_field": lambda context: context.update({"field": get_field()}),
-        "remove_duplicates_from_field": lambda context: remove_duplicates_from_field(context["field"]),
-        "exit": lambda context: exit
+        "print_field": lambda field: print(field),
+        "set_random_field": lambda field: field = get_field(),
+        "exit": exit
     }
 
 
     while True:
-        context.update({
-            "command": input(INPUT_MESSAGE)
-        })
-        next_func = functions.get(context["command"], lambda context: print("Not existing command -", context["command"]))
-        next_func(context)
+        command = input(INPUT_MESSAGE)
+        functions.get(command, lambda : print("Not existing command -", command))(field)
 
 
 if __name__ == "__main__":
