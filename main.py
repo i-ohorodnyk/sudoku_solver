@@ -54,10 +54,10 @@ def fill_delta_by_ndarray(a):
     for i in range(9):
         d = get_delta(a)
         c = 0
-        for i in range(9)
+        for i in range(9):
             if a[i] == 0:
-                [i] = d[c]
-                [c] += 1
+                a[i] = d[c]
+                c += 1
 
 def get_delta(a):
     """
@@ -72,9 +72,10 @@ def get_delta(a):
     assert type(a) == np.ndarray
     assert a.shape == (9, )
 
-    d = np.array([for i in set(range(1, 10)) - set(a)), dtype=np.int64)
+    d = np.array([np.int64(i) for i in set(range(1, 10)) - set(a)], dtype=np.int64)
     rnd.shuffle(d)
 
     return d
+
 
 get_field = lambda : np.array([np.array([rnd.randint(1, 9) for j in range(9)]) for i in range(9)])
