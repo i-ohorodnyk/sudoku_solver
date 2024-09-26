@@ -9,7 +9,7 @@ def remove_duplicates_from_field(field):
     """
     # Type validation section
     assert type(field) == np.ndarray
-    assert field.shape == (9,9)
+    assert field.shape == (9, 9)
 
     remove_duplicates_from_groups(field)
     for row in field:
@@ -27,8 +27,8 @@ def remove_duplicates_from_ndarray(a):
     assert type(a) == np.ndarray
     assert a.shape == (9, )
 
-    for i in range(len(a)):
-        for j in range(i+1, len(a)):
+    for i in range(9):
+        for j in range(i+1, 9):
             if a[i] == a[j]:
                 a[i] = 0
 
@@ -67,18 +67,17 @@ def fill_delta_by_ndarray(a):
     assert type(a) == np.ndarray
     assert a.shape == (9, )
 
+    d = get_delta(a)
+    c = 0
     for i in range(9):
-        d = get_delta(a)
-        c = 0
-        for i in range(9):
-            if a[i] == 0:
-                a[i] = d[c]
-                c += 1
+        if a[i] == 0:
+            a[i] = d[c]
+            c += 1
 
 def get_delta(a):
     """
-        This function complutes missing from range 1 to 9 numpy.int64 digitals
-        and returns this as numpy.ndarray of shape of (9, ).
+        This function computes missing digitals from range 1 to 9 numpy.int64
+        and returns delta as object numpy.ndarray of shape of (9, ).
         This function takes the numpy.ndarray object with (9,) shape of 
         numpy.int64 digitals that have no duplicates.
         This function returns delta - numpy.ndarray that represent digitals
@@ -95,8 +94,6 @@ def get_delta(a):
 
 
 get_field = lambda : np.array([np.array([rnd.randint(1, 9) for j in range(9)]) for i in range(9)])
-
-
 
 
 def main():
@@ -118,7 +115,7 @@ def main():
         "print_field": lambda context: print(context.get('field', "field in context is not found")),
         "set_random_field": lambda context: context.update({"field": get_field()}),
         "remove_duplicates_from_field": lambda context: remove_duplicates_from_field(context["field"]),
-        "exit": lambda context: exit
+        "exit": lambda context: exit()
     }
 
 
