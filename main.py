@@ -13,7 +13,11 @@ def fill_delta_by_field(field):
     assert type(field) == np.ndarray
     assert field.shape == (9, 9)
 
-    pass
+    fill_delta_by_group(field)
+    for row in field:
+        fill_delta_by_ndarray(row)
+    for column in field.transpose():
+        fill_delta_by_ndarray(column)
 
 
 def fill_delta_by_group(field):
@@ -26,7 +30,19 @@ def fill_delta_by_group(field):
     assert type(field) == np.ndarray
     assert field.shape == (9, 9)
 
-    pass
+    a = np.zeros(9, dtype=np.int64)
+    for i in range(0, 9, 3):
+        for j in range(0, 9, 3):
+            c = 0
+            for row in field[i:i+3]:
+                a[c:c+3] = row[j:j+3]
+                c += 3
+            fill_delta_by_ndarray(a)
+            c = 0
+            for row in field[i:i+3]:
+                row[j:j+3] = a[c:c+3]
+                c += 3
+                
 
 def fill_delta_by_ndarray(a):
     """
