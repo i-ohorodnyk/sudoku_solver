@@ -4,19 +4,24 @@ import random as rnd
 
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
+from jinja2 import Environment, FileSystemLoader
 
 from sudoku_solver.remove_duplicates import remove_duplicates_from_field
 from sudoku_solver.fill_delta import fill_delta_by_field
 
 get_field = lambda : np.array([np.array([rnd.randint(1, 9) for j in range(9)]) for i in range(9)])
 
+env = Environment(loader = FileSystemLoader('templates'))
+template = env.get_template("print_field.jinja")
+
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.get('/')
+@app.get('/', response_class=HTMLResponse)
 async def root():
-    return {"message": "Hello World!"}
+    return template.render(field=get_field())
 
 def main():
     INPUT_MESSAGE = """

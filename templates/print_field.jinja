@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="s://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="field">
+        {% for i in range(9)%}
+        <div class="row">
+          {% for j in range(9)%}
+            <div class="cell"><img class="digital" src="static/img/{{field[i][j]}}.png"/></div>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html> 
