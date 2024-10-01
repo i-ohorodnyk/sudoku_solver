@@ -2,11 +2,21 @@ import numpy as np
 import sys
 import random as rnd
 
-from remove_duplicates import remove_duplicates_from_field
-from fill_delta import fill_delta_by_field
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+
+from sudoku_solver.remove_duplicates import remove_duplicates_from_field
+from sudoku_solver.fill_delta import fill_delta_by_field
 
 get_field = lambda : np.array([np.array([rnd.randint(1, 9) for j in range(9)]) for i in range(9)])
 
+app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get('/')
+async def root():
+    return {"message": "Hello World!"}
 
 def main():
     INPUT_MESSAGE = """
