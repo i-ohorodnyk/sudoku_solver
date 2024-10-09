@@ -5,6 +5,9 @@ from sudoku_solver.remove_duplicates import remove_duplicates_from_field
 from sudoku_solver.fill_delta import fill_delta_by_field
 
 
+get_field = lambda : np.array([np.array([np.uint8(rnd.randint(1, 9)) for _ in range(9)]) for _ in range(9)])
+
+
 def main():
     INPUT_MESSAGE = """
     Please choose type the command that need to execute.
