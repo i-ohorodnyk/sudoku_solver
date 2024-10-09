@@ -1,4 +1,6 @@
 #!venv/bin/python
+import sys
+
 from sudoku_solver.remove_duplicates import remove_duplicates_from_field
 from sudoku_solver.fill_delta import fill_delta_by_field
 
