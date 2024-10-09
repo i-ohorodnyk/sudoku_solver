@@ -1,4 +1,6 @@
 #!venv/bin/python
+import numpy as np
+import random as rnd
 import sys
 
 from sudoku_solver.remove_duplicates import remove_duplicates_from_field
